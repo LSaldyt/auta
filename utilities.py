@@ -85,10 +85,6 @@ def get_changed_files():
     output = get_output(['git', 'diff', '--name-only'])
     return output.splitlines()
 
-# Changed files in packages/pygsti (not tests/repotools)
-def get_changed_core_files(core='pygsti'):
-    return (filename.split(core, 1)[1] for filename in get_changed_files() if core in filename)
-
 # Immediate packages under pygsti that have changed (i.e. tools, drivers..)
 def get_changed_packages():
     return (corefile.split('/')[1] for corefile in get_changed_core_files())
@@ -107,4 +103,3 @@ def json_app(app):
             json.dump(data, outfile)
         return data
     return inner
-
